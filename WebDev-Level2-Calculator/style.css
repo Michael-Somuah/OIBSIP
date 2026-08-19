@@ -1,0 +1,125 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #121214;
+}
+
+.calculator {
+  width: 320px;
+  background: #2b2c30;
+  border-radius: 24px;
+  padding: 24px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+  border: 1px solid #38393e;
+}
+
+/* Header branding */
+.calc-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  padding: 0 4px;
+}
+
+.brand {
+  color: #a3a5ad;
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 1.5px;
+}
+
+.model {
+  color: #63656e;
+  font-weight: 600;
+  font-size: 0.75rem;
+  letter-spacing: 1px;
+}
+
+/* LCD Screen with Retro Scanlines */
+.display {
+  background-color: #c2ceb8;
+  background-image: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.05),
+    rgba(0, 0, 0, 0.05) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+  color: #1a2215;
+  font-size: 2.8rem;
+  font-weight: 600;
+  text-align: right;
+  padding: 18px 16px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.2);
+  min-height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  word-break: break-all;
+}
+
+/* Grid Layout */
+.buttons {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+
+/* Base Button Styles */
+.btn {
+  height: 56px;
+  font-size: 1.3rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: filter 0.15s ease, transform 0.05s ease;
+  box-shadow: 0 3px 0 rgba(0, 0, 0, 0.25);
+}
+
+.btn:active {
+  transform: translateY(2px);
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.25);
+}
+
+/* Specific Button Color Schemes */
+.btn-dark {
+  background-color: #43454c;
+  color: #e3e4e8;
+}
+
+.btn-light {
+  background-color: #e2e1dc;
+  color: #1a1a1c;
+}
+
+.btn-orange {
+  background-color: #e3a038;
+  color: #1a1a1c;
+}
+
+.btn-green {
+  background-color: #7d9673;
+  color: #1a1a1c;
+}
+
+/* Layout Spans */
+.btn-wide {
+  grid-column: span 2;
+}
+
+.btn-zero {
+  grid-column: span 2;
+}
