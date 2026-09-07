@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="landing-container">
+    <!-- Hero Section -->
+    <header class="hero-section">
+        <div class="profile-badge">
+            <span class="status-dot"></span> Available for Projects
+        </div>
+        <h1>Hi, I'm <span class="highlight">Michael</span></h1>
+        <p class="hero-subtitle">
+            IS Undergraduate & Developer building robust full-stack applications, interactive systems, and modern web solutions.
+        </p>
+        
+        <div class="hero-actions">
+            {% if username %}
+                <a href="{{ url_for('dashboard') }}" class="btn btn-primary">Go to Dashboard</a>
+                <a href="{{ url_for('logout') }}" class="btn btn-outline-danger">Logout</a>
+            {% else %}
+                <a href="{{ url_for('login') }}" class="btn btn-primary">Sign In</a>
+                <a href="{{ url_for('register') }}" class="btn btn-secondary">Get Started</a>
+            {% endif %}
+        </div>
+    </header>
+
+    <!-- Project / Platform Features -->
+    <section class="features-grid">
+        <div class="feature-card">
+            <h3>Secure Auth System</h3>
+            <p>Session-based authentication featuring scrypt password hashing, parameter validation, and secure route handling.</p>
+        </div>
+
+        <div class="feature-card">
+            <h3>Flask & SQLite Engine</h3>
+            <p>Lightweight and fast Python backend architecture with database integrations and Jinja2 templating.</p>
+        </div>
+
+        <div class="feature-card">
+            <h3>Account Recovery</h3>
+            <p>Built-in password reset workflow with security verification logic and session cleanup.</p>
+        </div>
+    </section>
+
+    <!-- Footer Quote / Bio -->
+    <footer class="landing-footer">
+        <p>Built with Python, Flask & SQLite</p>
+    </footer>
+</div>
+{% endblock %}
