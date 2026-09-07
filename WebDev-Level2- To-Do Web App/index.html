@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Today's List — Task Ticket</title>
+
+
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<main class="docket">
+  <header class="docket__header">
+    <div class="docket__title-row">
+      <h1>Mick's Today's List</h1>
+      <span class="docket__stamp-date" id="docketDate"></span>
+    </div>
+    <p class="docket__sub">Log the jobs, work the line, stamp them done.</p>
+  </header>
+
+  <form class="docket__intake" id="addForm" autocomplete="off">
+    <input type="text" id="taskInput" placeholder="Add a job to the line…" maxlength="140" aria-label="New task">
+    <button type="submit" class="btn btn--add">Add Task</button>
+  </form>
+
+  <section class="docket__section" aria-labelledby="pendingHeading">
+    <div class="docket__section-head">
+      <h2 id="pendingHeading">Pending</h2>
+      <span class="docket__count" id="pendingCount">0 pending</span>
+    </div>
+    <ul class="docket__list" id="pendingList"></ul>
+    <p class="docket__empty" id="pendingEmpty">No jobs on the line — add one above.</p>
+  </section>
+
+  <div class="docket__perf" aria-hidden="true"></div>
+
+  <section class="docket__section" aria-labelledby="completedHeading">
+    <div class="docket__section-head">
+      <h2 id="completedHeading">Completed</h2>
+      <span class="docket__count" id="completedCount">0 completed</span>
+    </div>
+    <ul class="docket__list" id="completedList"></ul>
+    <p class="docket__empty" id="completedEmpty">Nothing stamped yet — check one off.</p>
+  </section>
+</main>
+
+<template id="taskTemplate">
+  <li class="task">
+    <button class="task__toggle" type="button" aria-label="Mark task complete"></button>
+    <div class="task__body">
+      <span class="task__text"></span>
+      <input class="task__edit-input" type="text" maxlength="140">
+      <span class="task__time"></span>
+    </div>
+    <div class="task__actions">
+      <button class="task__icon-btn task__edit" type="button" aria-label="Edit task">✎</button>
+      <button class="task__icon-btn task__delete" type="button" aria-label="Delete task">✕</button>
+    </div>
+  </li>
+</template>
+
+<script src="script.js"></script>
+</body>
+</html>
