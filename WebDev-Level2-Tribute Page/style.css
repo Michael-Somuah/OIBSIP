@@ -1,0 +1,463 @@
+/* =========================================================
+   Kwame Nkrumah — Tribute Page
+   Palette drawn from Ghana's own flag and Black Star emblem:
+   forest green, black-star charcoal, flag gold, flag red.
+   ========================================================= */
+
+:root {
+  --green-deep:   #063d24;
+  --green:        #0b6b3a;
+  --green-2:      #0f8548;
+  --charcoal:     #16130f;
+  --charcoal-2:   #211c15;
+  --gold:         #f5c518;
+  --gold-soft:    #e6b93a;
+  --red:          #ce1126;
+  --cream:        #f7f1e2;
+  --cream-2:      #efe4c8;
+  --ink:          #241f16;
+  --ink-soft:     #4d4536;
+
+  --font-display: "Space Grotesk", "Segoe UI", sans-serif;
+  --font-body: "Literata", Georgia, serif;
+
+  --max-width: 1160px;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  color: var(--ink);
+  background: var(--cream);
+  line-height: 1.68;
+  -webkit-font-smoothing: antialiased;
+}
+
+img { max-width: 100%; display: block; }
+
+a { color: inherit; }
+
+h1, h2, h3 { font-family: var(--font-display); margin: 0; }
+
+p { margin: 0 0 1em; }
+
+.section-heading { max-width: var(--max-width); margin: 0 auto; padding: 0 clamp(1.5rem, 5vw, 3rem); }
+.section-eyebrow {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 0.75rem;
+}
+.section-heading.light .section-eyebrow { color: var(--gold); }
+.section-heading h2 {
+  font-size: clamp(1.8rem, 3.4vw, 2.6rem);
+  font-weight: 600;
+  max-width: 22ch;
+  margin-bottom: 2.5rem;
+  line-height: 1.15;
+}
+.section-heading.light h2 { color: var(--cream); }
+
+/* ===================== HERO ===================== */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  background: radial-gradient(ellipse at 22% 20%, var(--green-2), var(--green-deep) 65%, var(--charcoal) 100%);
+  color: var(--cream);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Signature element: a radiating "Black Star" — Ghana's national emblem —
+   rendered as a rotating star polygon plus soft light rays. */
+.hero-rays {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  opacity: 0.9;
+}
+
+.hero-rays::before {
+  content: "";
+  position: absolute;
+  top: 8%;
+  right: 6%;
+  width: min(46vw, 560px);
+  height: min(46vw, 560px);
+  background:
+    conic-gradient(from 0deg,
+      transparent 0deg, rgba(245,197,24,0.16) 4deg, transparent 9deg,
+      transparent 36deg, rgba(245,197,24,0.16) 40deg, transparent 45deg,
+      transparent 72deg, rgba(245,197,24,0.16) 76deg, transparent 81deg,
+      transparent 108deg, rgba(245,197,24,0.16) 112deg, transparent 117deg,
+      transparent 144deg, rgba(245,197,24,0.16) 148deg, transparent 153deg,
+      transparent 180deg, rgba(245,197,24,0.16) 184deg, transparent 189deg,
+      transparent 216deg, rgba(245,197,24,0.16) 220deg, transparent 225deg,
+      transparent 252deg, rgba(245,197,24,0.16) 256deg, transparent 261deg,
+      transparent 288deg, rgba(245,197,24,0.16) 292deg, transparent 297deg,
+      transparent 324deg, rgba(245,197,24,0.16) 328deg, transparent 333deg,
+      transparent 360deg);
+  border-radius: 50%;
+  animation: rays-spin 60s linear infinite;
+}
+
+.hero-rays::after {
+  /* the star itself, drawn with clip-path */
+  content: "";
+  position: absolute;
+  top: 8%;
+  right: 6%;
+  width: min(46vw, 560px);
+  height: min(46vw, 560px);
+  transform: translate(0,0) scale(0.42);
+  transform-origin: center;
+  background: var(--gold);
+  opacity: 0.9;
+  clip-path: polygon(
+    50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%,
+    50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%
+  );
+  filter: blur(0.3px) drop-shadow(0 0 40px rgba(245,197,24,0.35));
+  animation: star-pulse 5s ease-in-out infinite;
+}
+
+@keyframes rays-spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+@keyframes star-pulse {
+  0%, 100% { opacity: 0.8; transform: translate(0,0) scale(0.42); }
+  50%      { opacity: 1;   transform: translate(0,0) scale(0.46); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-rays::before, .hero-rays::after { animation: none; }
+}
+
+.hero-nav {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem clamp(1.5rem, 5vw, 3rem);
+}
+.hero-nav-mark { font-family: var(--font-display); font-weight: 600; font-size: 1.05rem; letter-spacing: 0.02em; }
+.hero-nav-links { display: flex; gap: 1.75rem; font-size: 0.88rem; font-family: var(--font-display); }
+.hero-nav-links a { text-decoration: none; color: var(--cream-2); opacity: 0.85; transition: opacity 0.2s; }
+.hero-nav-links a:hover { opacity: 1; color: var(--gold); }
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: var(--max-width);
+  width: 100%;
+  margin: 0 auto;
+  padding: 3rem clamp(1.5rem, 5vw, 3rem) 2rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.hero-eyebrow {
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+.hero-name {
+  font-size: clamp(3rem, 9vw, 6.2rem);
+  font-weight: 700;
+  line-height: 0.98;
+  margin-bottom: 1.5rem;
+  max-width: 14ch;
+  letter-spacing: -0.01em;
+}
+
+.hero-tagline {
+  font-size: clamp(1.05rem, 1.7vw, 1.3rem);
+  color: var(--cream-2);
+  max-width: 42ch;
+  font-family: var(--font-body);
+  font-style: italic;
+  font-weight: 400;
+}
+
+.hero-scroll {
+  display: inline-block;
+  margin-top: 2rem;
+  text-decoration: none;
+  color: var(--cream);
+  border-bottom: 1px solid var(--gold);
+  padding-bottom: 0.2rem;
+  width: fit-content;
+  font-size: 0.95rem;
+  font-family: var(--font-display);
+  transition: color 0.2s;
+}
+.hero-scroll:hover { color: var(--gold); }
+
+.hero-portrait {
+  position: relative;
+  z-index: 2;
+  align-self: center;
+  margin: 0 auto 3.5rem;
+  width: min(280px, 60vw);
+}
+.hero-portrait img {
+  width: 100%;
+  aspect-ratio: 4/5;
+  object-fit: cover;
+  border-radius: 6px;
+  border: 6px solid var(--cream);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+}
+.hero-portrait figcaption {
+  margin-top: 0.85rem;
+  font-size: 0.72rem;
+  color: var(--cream-2);
+  opacity: 0.75;
+  text-align: center;
+  line-height: 1.5;
+}
+
+/* ===================== BIOGRAPHY ===================== */
+.biography {
+  padding: clamp(4rem, 8vw, 6.5rem) 0;
+  background: var(--cream);
+}
+
+.bio-columns {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 clamp(1.5rem, 5vw, 3rem);
+  columns: 1;
+  font-size: 1.05rem;
+  color: var(--ink-soft);
+}
+
+.bio-columns p:first-of-type::first-letter {
+  font-family: var(--font-display);
+  font-size: 3.4rem;
+  font-weight: 700;
+  float: left;
+  line-height: 0.85;
+  padding-right: 0.14em;
+  margin-top: 0.08em;
+  color: var(--red);
+}
+
+.bio-columns em { color: var(--ink); }
+
+/* ===================== TIMELINE ===================== */
+.timeline-section {
+  background: var(--charcoal);
+  padding: clamp(4rem, 8vw, 6.5rem) 0;
+}
+
+.timeline {
+  list-style: none;
+  margin: 0 auto;
+  padding: 0 clamp(1.5rem, 5vw, 3rem);
+  max-width: var(--max-width);
+  position: relative;
+}
+
+.timeline::before {
+  content: "";
+  position: absolute;
+  left: clamp(1.5rem, 5vw, 3rem);
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(to bottom, var(--gold), var(--green-2) 60%, transparent);
+  margin-left: 2.6rem;
+}
+
+.timeline-item {
+  display: grid;
+  grid-template-columns: 5.2rem 1fr;
+  gap: 1.5rem;
+  align-items: start;
+  position: relative;
+  margin-bottom: 2.25rem;
+}
+
+.timeline-item:last-child { margin-bottom: 0; }
+
+.timeline-year {
+  font-family: var(--font-display);
+  font-weight: 700;
+  color: var(--gold);
+  font-size: 1rem;
+  text-align: right;
+  padding-top: 1.3rem;
+  position: relative;
+}
+
+.timeline-year::after {
+  content: "";
+  position: absolute;
+  right: -1.75rem;
+  top: 1.5rem;
+  width: 13px;
+  height: 13px;
+  background: var(--gold);
+  clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+  box-shadow: 0 0 0 4px var(--charcoal);
+}
+
+.timeline-card {
+  background: var(--charcoal-2);
+  border-radius: 10px;
+  padding: 1.35rem 1.6rem;
+  border: 1px solid rgba(245,197,24,0.15);
+}
+
+.timeline-card h3 {
+  color: var(--cream);
+  font-size: 1.12rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.timeline-card p {
+  color: var(--cream-2);
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+/* ===================== QUOTE ===================== */
+.quote-section {
+  background: linear-gradient(135deg, var(--red), #a90e1f 75%);
+  padding: clamp(4.5rem, 9vw, 7rem) clamp(1.5rem, 5vw, 3rem);
+  display: flex;
+  justify-content: center;
+}
+
+.quote-block {
+  max-width: 760px;
+  text-align: center;
+  position: relative;
+}
+
+.quote-mark {
+  font-family: var(--font-display);
+  font-size: 6rem;
+  line-height: 1;
+  color: var(--cream);
+  opacity: 0.3;
+  display: block;
+}
+
+.quote-block blockquote {
+  margin: -1.5rem 0 1.25rem;
+}
+
+.quote-block p {
+  font-family: var(--font-body);
+  font-style: italic;
+  font-weight: 500;
+  font-size: clamp(1.5rem, 3.6vw, 2.3rem);
+  color: var(--cream);
+  line-height: 1.35;
+  margin: 0;
+}
+
+.quote-block cite {
+  font-family: var(--font-display);
+  font-style: normal;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  color: var(--gold);
+  opacity: 0.95;
+}
+
+/* ===================== CLOSING ===================== */
+.closing {
+  background: var(--cream);
+  padding: clamp(4rem, 8vw, 6rem) 0 clamp(5rem, 9vw, 7rem);
+}
+
+.closing-text {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 clamp(1.5rem, 5vw, 3rem);
+  font-size: 1.15rem;
+  color: var(--ink-soft);
+  max-width: 68ch;
+}
+
+/* ===================== FOOTER ===================== */
+.site-footer {
+  background: var(--charcoal);
+  color: var(--cream-2);
+  padding: 2.25rem clamp(1.5rem, 5vw, 3rem);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.8rem;
+}
+
+.site-footer p { margin: 0; max-width: 62ch; opacity: 0.8; }
+
+.back-to-top {
+  text-decoration: none;
+  color: var(--gold);
+  white-space: nowrap;
+  font-weight: 500;
+  font-family: var(--font-display);
+}
+
+/* Scroll reveal (progressive enhancement via script.js) */
+.reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ===================== RESPONSIVE ===================== */
+@media (min-width: 760px) {
+  .hero { flex-direction: row; align-items: center; }
+  .hero-content { flex: 1; padding-top: 4rem; }
+  .hero-portrait { margin: 0 clamp(2rem, 6vw, 5rem) 0 0; order: 2; width: min(320px, 32vw); }
+  .hero-nav { position: absolute; top: 0; left: 0; right: 0; }
+
+  .bio-columns { columns: 2; column-gap: 3rem; }
+  .bio-columns p { break-inside: avoid; }
+}
+
+@media (max-width: 480px) {
+  .hero-nav-links { gap: 1rem; font-size: 0.78rem; }
+  .timeline-item { grid-template-columns: 3.6rem 1fr; gap: 1rem; }
+  .timeline::before { margin-left: 1.4rem; }
+  .timeline-year { font-size: 0.85rem; }
+  .timeline-year::after { right: -1.1rem; width: 11px; height: 11px; }
+}
+
+/* Accessible focus states */
+a:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+}
